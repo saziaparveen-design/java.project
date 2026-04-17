@@ -1,0 +1,95 @@
+// GridItem class
+class GridItem {
+    String id;
+    String name;
+    int quantity;
+
+    // Constructor
+    GridItem(String id, String name, int quantity) {
+        this.id = id;
+        this.name = name;
+        this.quantity = quantity;
+    }
+}
+
+// Warehouse class
+class Warehouse {
+    GridItem[][] grid;
+    int rows, cols;
+
+    // Constructor
+    Warehouse(int rows, int cols) {
+        this.rows = rows;
+        this.cols = cols;
+        grid = new GridItem[rows][cols];
+    }
+
+    // Add item to grid
+    void addItem(int row, int col, GridItem item) {
+        if (row < rows && col < cols) {
+            grid[row][col] = item;
+        } else {
+            System.out.println("Invalid position!");
+        }
+    }
+
+    // Search item by ID
+    void searchItem(String id) {
+        boolean found = false;
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (grid[i][j] != null && grid[i][j].id.equals(id)) {
+                    System.out.println("Item Found!");
+                    System.out.println("ID: " + grid[i][j].id);
+                    System.out.println("Name: " + grid[i][j].name);
+                    System.out.println("Quantity: " + grid[i][j].quantity);
+                    System.out.println("Location: Row " + i + " Column " + j);
+                    found = true;
+                }
+            }
+        }
+
+        if (!found) {
+            System.out.println("Item Not Found!");
+        }
+    }
+
+    // Display all items
+    void displayItems() {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (grid[i][j] != null) {
+                    System.out.println("[" + i + "," + j + "] -> " +
+                            grid[i][j].id + " | " +
+                            grid[i][j].name + " | Qty: " +
+                            grid[i][j].quantity);
+                }
+            }
+        }
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+
+        // Create warehouse
+        Warehouse wh = new Warehouse(3, 3);
+
+        // Add items
+        wh.addItem(0, 0, new GridItem("I101", "Laptop", 10));
+        wh.addItem(1, 2, new GridItem("I102", "Mouse", 50));
+        wh.addItem(2, 1, new GridItem("I103", "Keyboard", 30));
+
+        // Display all items
+        System.out.println("All Items:");
+        wh.displayItems();
+
+        System.out.println("\nSearching...");
+        
+        // Search items
+        wh.searchItem("I102");
+        wh.searchItem("I999");
+    }
+}
