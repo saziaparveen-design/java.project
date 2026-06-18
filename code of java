@@ -1,10 +1,10 @@
-// GridItem class
+
 class GridItem {
     String id;
     String name;
     int quantity;
 
-    // Constructor
+
     GridItem(String id, String name, int quantity) {
         this.id = id;
         this.name = name;
@@ -12,7 +12,7 @@ class GridItem {
     }
 }
 
-// Warehouse class
+
 class Warehouse {
     GridItem[][] grid;
     int rows, cols;
@@ -24,7 +24,7 @@ class Warehouse {
         grid = new GridItem[rows][cols];
     }
 
-    // Add item to grid
+   
     void addItem(int row, int col, GridItem item) {
         if (row < rows && col < cols) {
             grid[row][col] = item;
@@ -33,7 +33,7 @@ class Warehouse {
         }
     }
 
-    // Search item by ID
+  
     void searchItem(String id) {
         boolean found = false;
 
@@ -55,7 +55,6 @@ class Warehouse {
         }
     }
 
-    // Display all items
     void displayItems() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -70,25 +69,22 @@ class Warehouse {
     }
 }
 
-// Main class
+
 public class Main {
     public static void main(String[] args) {
 
-        // Create warehouse
         Warehouse wh = new Warehouse(3, 3);
 
-        // Add items
         wh.addItem(0, 0, new GridItem("I101", "Laptop", 10));
         wh.addItem(1, 2, new GridItem("I102", "Mouse", 50));
         wh.addItem(2, 1, new GridItem("I103", "Keyboard", 30));
 
-        // Display all items
         System.out.println("All Items:");
         wh.displayItems();
 
         System.out.println("\nSearching...");
         
-        // Search items
+  
         wh.searchItem("I102");
         wh.searchItem("I999");
     }
